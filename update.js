@@ -1,14 +1,16 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://127.0.0.1:27017/";
+var mysql = require('mysql');
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("mydb");
-  var myquery = { address: "Valley 345" };
-  var newvalues = { $set: {name: "Mickey", address: "Canyon 123" } };
-  dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) {
-    if (err) throw err;
-    console.log("1 document updated");
-    db.close();
-  });
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "1234",
+  database: "node1"
 });
+con.connect(function(err) {
+    if (err) throw err;
+    var sql = "UPDATE customers SET address = 'INDIA' WHERE address ='Valley 345'";
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("Number of records deleted: " + result.affectedRows);
+    });
+  });

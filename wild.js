@@ -6,11 +6,11 @@ var con = mysql.createConnection({
   password: "1234",
   database: "node1"
 });
+
 con.connect(function(err) {
     if (err) throw err;
-    var sql = "DELETE FROM customers WHERE address = 'Mountain 21'";
-    con.query(sql, function (err, result) {
+    con.query("SELECT * FROM customers WHERE address LIKE 'S%'", function (err, result, fields) {
       if (err) throw err;
-      console.log("Number of records deleted: " + result.affectedRows);
+      console.log(fields);
     });
   });

@@ -12,9 +12,9 @@ con.connect(function(err){
     if(err) throw err;
     console.log("Connected!");
 
-    var sql="INSERT INTO customers(name,address) VALUES('Company INC','Highway 37')";
+    var sql="INSERT INTO customers(name,address) VALUES('Michelle','Blue Village 37')";
     con.query(sql,function(err,result){
         if(err) throw err;
-        console.log("inserted");
+        console.log("inserted,ID:"+result.insertId);
     });
 });
